@@ -25,14 +25,20 @@ function! dtreeui#DivideFileList(ftlist, depth)
     return l:ftlist
 endfunction
 
+" Function: RefreshOpenedDir
+" change the displayed directory's state, from '▷' to '▽'
 function! dtreeui#RefreshOpenedDir(dirpath)
     return substitute(a:dirpath, "▷", "▽", "e")
 endfunction
 
+" Function: RefreshClosedDir
+" change the displayed directory's state, from '▽' to '▷'
 function! dtreeui#RefreshClosedDir(dirpath)
     return substitute(a:dirpath, "▽", "▷", "e")
 endfunction
 
+" Function: RefreshUI
+" refresh displayed file tree
 function! dtreeui#RefreshUI(ftlist)
     set modifiable
     normal gg
@@ -43,11 +49,13 @@ function! dtreeui#RefreshUI(ftlist)
     set nomodifiable
 endfunction
 
+" Function: GetDepth
+" get a file's depth from work directory
 function! dtreeui#GetDepth(dirabpath)
     let l:count = 0
     let l:depth = 0
-    while l:count < len(a:dirpath)
-        if a:dirpath[l:count] == "\t"
+    while l:count < len(a:dirabpath)
+        if a:dirabpath[l:count] == "\t"
             let l:depth += 1
         else
             break
