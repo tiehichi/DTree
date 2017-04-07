@@ -2,15 +2,15 @@
 " divide file list to normal file and directory
 " Directory: '▷' + dirname
 " Normal File: ' ' + filename
-function! dtreeui#DivideFileList(ftlist, depth)
+function! dtreeui#DivideFileList(ftlist, abfilepath, depth)
     let l:ftlist = deepcopy(a:ftlist)
 
     let l:index = 0
-    for l:file in l:ftlist
-        if isdirectory(file)
-            let l:ftlist[l:index] = '▷' . l:file . '/'
+    for l:file in a:abfilepath
+        if isdirectory(l:file)
+            let l:ftlist[l:index] = '▷' . l:ftlist[l:index] . '/'
         else
-            let l:ftlist[l:index] = ' ' . l:file
+            let l:ftlist[l:index] = ' ' . l:ftlist[l:index]
         endif
         
         let l:dep = 0
@@ -40,6 +40,7 @@ endfunction
 " Function: RefreshUI
 " refresh displayed file tree
 function! dtreeui#RefreshUI(ftlist)
+    let l:savecursor = getpos(".")
     set modifiable
     normal gg
     normal dG
@@ -47,6 +48,7 @@ function! dtreeui#RefreshUI(ftlist)
     normal dd       
     normal gg
     set nomodifiable
+    call setpos(".", l:savecursor)
 endfunction
 
 " Function: GetDepth
