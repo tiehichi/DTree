@@ -1,3 +1,18 @@
+" ==========================================================
+" DTree - a vim plugin to show file tree
+" Git Repository: https://github.com/StarAndRabbit/DTree.git
+" Version: 0.1 Alpha
+" Author: Dai Bingzhi <daibingzhi@foxmail.com>
+" Last Change: 2017.04.07
+" ==========================================================
+
+" make sure the module loaded once
+if exists('g:dtree_loaded')
+    finish
+else
+    let g:dtree_loaded = 1
+endif
+
 let s:filetreeap = []   " file tree absolute path
 let s:filetree = []     " file tree ready for display
 let s:openeddir = {}    " opened directory and its contents
@@ -53,6 +68,7 @@ function! GetRootFileList()
     call dtreeui#RefreshUI(s:filetree)
 endfunction
 
+" open directory to show its contents and refresh UI
 function! OpenDir(index)
     let l:contentfile = s:GetFileList(s:filetreeap[a:index])
     let l:contentfileabpath = []
@@ -67,6 +83,7 @@ function! OpenDir(index)
     call dtreeui#RefreshUI(s:filetree)
 endfunction
 
+" recursive close directory and refresh UI
 function! CloseDir(index)
     let l:count = 1
     for l:file in s:openeddir[s:filetreeap[a:index]]
