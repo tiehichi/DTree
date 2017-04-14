@@ -1,3 +1,9 @@
+" =======================================================
+" dtreeui - some functions to refresh ui for plugin DTree
+" Author: Dai Bingzhi <daibingzhi@foxmail.com>
+" Last Change: 2017.04.14
+" =======================================================
+
 " Function: DivideFileList
 " divide file list to normal file and directory
 " Directory: '▷' + dirname
