@@ -1,7 +1,7 @@
 " =======================================================
 " dtreeui - some functions to refresh ui for plugin DTree
 " Author: Dai Bingzhi <daibingzhi@foxmail.com>
-" Last Change: 2017.04.14
+" Last Change: 2017.04.16
 " =======================================================
 
 " Function: DivideFileList
@@ -46,7 +46,7 @@ endfunction
 " Function: RefreshUI
 " refresh displayed file tree
 function! dtreeui#RefreshUI(ftlist)
-    let l:savecursor = getpos(".")
+    let l:saveview = winsaveview()
     set modifiable
     normal gg
     normal dG
@@ -54,7 +54,7 @@ function! dtreeui#RefreshUI(ftlist)
     normal dd       
     normal gg
     set nomodifiable
-    call setpos(".", l:savecursor)
+    call winrestview(l:saveview)
 endfunction
 
 " Function: GetDepth
