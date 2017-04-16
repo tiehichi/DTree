@@ -1,9 +1,9 @@
 " ==========================================================
 " DTree - a vim plugin to show file tree
 " Git Repository: https://github.com/StarAndRabbit/DTree.git
-" Version: 0.2 Alpha
+" Version: 0.3 Alpha
 " Author: Dai Bingzhi <daibingzhi@foxmail.com>
-" Last Change: 2017.04.14
+" Last Change: 2017.04.16
 " ==========================================================
 
 " make sure the module loaded once
@@ -105,7 +105,7 @@ function! s:CloseDir(index)
 endfunction
 
 " open or close directory
-function! ToggleDir(index)
+function! s:ToggleDir(index)
     if s:IsDirClosed(a:index)
         call s:OpenDir(a:index)
     else
@@ -113,9 +113,24 @@ function! ToggleDir(index)
     endif
 endfunction
 
+" open normal file
+function! s:OpenFile(index)
+    if winnr() == winnr('#')
+        execute('vertical rightbelow sp ' . s:filetreeap[a:index])
+        let l:newwinid = win_getid(winnr())
+        call win_gotoid(win_getid(1))
+        execute('vertical resize 32')
+        call win_gotoid(l:newwinid)
+    else
+        call win_gotoid(win_getid(winnr('#')))
+        execute('e ' . s:filetreeap[a:index])
+    endif
+endfunction
+
 " open file tree window
 function! s:OpenFileTree()
     execute('vertical topleft sp DTree~')
+    execute('vertical resize 32')
     let l:lastwinid = win_getid(winnr('#'))
     let s:winid = win_getid(1)
     call s:GetRootFileList()
@@ -130,6 +145,14 @@ function! s:CloseFileTree()
     execute('q!')
     let s:winid = -1
     call win_gotoid(l:lastwinid)
+endfunction
+
+function! ToggleFileOrDir(index)
+    if isdirectory(s:filetreeap[a:index])
+        call s:ToggleDir(a:index)
+    else
+        call s:OpenFile(a:index)
+    endif
 endfunction
 
 function! ToggleDTree()
