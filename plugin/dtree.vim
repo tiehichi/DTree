@@ -90,7 +90,7 @@ function! s:CloseDir(index)
     for l:file in s:openeddir[s:filetreeap[a:index]]
         if isdirectory(l:file)
             if s:IsDirOpened(a:index + l:count)
-                call CloseDir(a:index + l:count)
+                call s:CloseDir(a:index + l:count)
             endif
         endif
         let l:count += 1
