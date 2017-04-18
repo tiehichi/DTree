@@ -3,6 +3,9 @@ A Vim plugin to show file tree, and it's easy to open files
 
 ## Update
 
+### 2017.04.18
+- add syntax file
+
 ### 2017.04.16
 - add function to open normal file
 - set DTree window's filetype and add ftplugin to add keymap
