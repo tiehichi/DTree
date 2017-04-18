@@ -19,4 +19,4 @@ A Vim plugin to show file tree, and it's easy to open files
 - now can open and close directory by using OpenDir() and CloseDir()
 
 ## TODO
-- add syntax plugin
+~~add syntax plugin~~
