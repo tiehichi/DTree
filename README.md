@@ -3,6 +3,10 @@ A Vim plugin to show file tree, and it's easy to open files
 
 ## Update
 
+### 2017.04.19
+- fix the attribute of dtree window
+- add command 'DTreeToggle' to open or close dtree window
+
 ### 2017.04.18
 - add syntax file
 
