@@ -1,9 +1,9 @@
 " ==========================================================
 " DTree - a vim plugin to show file tree
 " Git Repository: https://github.com/StarAndRabbit/DTree.git
-" Version: 0.3 Alpha
+" Version: 0.3 Beta
 " Author: Dai Bingzhi <daibingzhi@foxmail.com>
-" Last Change: 2017.04.16
+" Last Change: 2017.04.19
 " ==========================================================
 
 " make sure the module loaded once
@@ -12,6 +12,8 @@ if exists('g:dtree_loaded')
 else
     let g:dtree_loaded = 1
 endif
+
+command! -nargs=0 DTreeToggle call s:ToggleDTree()
 
 let s:filetreeap = []   " file tree absolute path
 let s:filetree = []     " file tree ready for display
@@ -155,7 +157,7 @@ function! ToggleFileOrDir(index)
     endif
 endfunction
 
-function! ToggleDTree()
+function! s:ToggleDTree()
     if s:winid == -1
         call s:OpenFileTree()
     else
