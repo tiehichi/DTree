@@ -1,6 +1,9 @@
 # DTree
 A Vim plugin to show file tree, and it's easy to open files
 
+## Usage
+use command 'DTreeToggle' to open or close dtree window
+
 ## Update
 
 ### 2017.04.19
