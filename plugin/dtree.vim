@@ -15,6 +15,11 @@ endif
 
 command! -nargs=0 DTreeToggle call s:ToggleDTree()
 
+augroup resizedtree
+    au!
+    au WinEnter * call s:ResetDTreeWinResize()
+augroup END
+
 let s:filetreeap = []   " file tree absolute path
 let s:filetree = []     " file tree ready for display
 let s:openeddir = {}    " opened directory and its contents
@@ -159,5 +164,14 @@ function! s:ToggleDTree()
         call s:OpenFileTree()
     else
         call s:CloseFileTree()
+    endif
+endfunction
+
+function! s:ResetDTreeWinResize()
+    if bufwinnr('__DTree__') != -1
+        let lastwinnr = winnr()
+        call win_gotoid(bufwinid('__DTree__'))
+        execute('vertical resize 30')
+        call win_gotoid(win_getid(lastwinnr))
     endif
 endfunction
