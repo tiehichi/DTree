@@ -18,7 +18,6 @@ command! -nargs=0 DTreeToggle call s:ToggleDTree()
 let s:filetreeap = []   " file tree absolute path
 let s:filetree = []     " file tree ready for display
 let s:openeddir = {}    " opened directory and its contents
-let s:winid = -1        " the id of file tree window
 
 function! s:ResetAll()
     let s:filetreeap = []
@@ -117,11 +116,11 @@ endfunction
 
 " open normal file
 function! s:OpenFile(index)
-    if winnr() == winnr('#')
+    if winnr('$') == 1
         execute('vertical rightbelow sp ' . s:filetreeap[a:index])
         let l:newwinid = win_getid(winnr())
-        call win_gotoid(win_getid(1))
-        execute('vertical resize 32')
+        call win_gotoid(bufwinid('__DTree__'))
+        execute('vertical resize 30')
         call win_gotoid(l:newwinid)
     else
         call win_gotoid(win_getid(winnr('#')))
@@ -131,10 +130,9 @@ endfunction
 
 " open file tree window
 function! s:OpenFileTree()
-    execute('vertical topleft sp DTree~')
-    execute('vertical resize 32')
+    execute('vertical topleft sp __DTree__')
+    execute('vertical resize 30')
     let l:lastwinid = win_getid(winnr('#'))
-    let s:winid = win_getid(1)
     call s:GetRootFileList()
     set filetype=dtree
     call win_gotoid(l:lastwinid)
@@ -143,9 +141,8 @@ endfunction
 " close file tree window
 function! s:CloseFileTree()
     let l:lastwinid = win_getid(winnr())
-    call win_gotoid(s:winid)
+    call win_gotoid(bufwinid('__DTree__'))
     execute('q!')
-    let s:winid = -1
     call win_gotoid(l:lastwinid)
 endfunction
 
@@ -158,7 +155,7 @@ function! ToggleFileOrDir(index)
 endfunction
 
 function! s:ToggleDTree()
-    if s:winid == -1
+    if bufwinnr('__DTree__') == -1
         call s:OpenFileTree()
     else
         call s:CloseFileTree()
