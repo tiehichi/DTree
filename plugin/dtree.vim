@@ -1,9 +1,9 @@
 " ==========================================================
 " DTree - a vim plugin to show file tree
 " Git Repository: https://github.com/StarAndRabbit/DTree.git
-" Version: 0.3 Beta
+" Version: 0.4 Beta
 " Author: Dai Bingzhi <daibingzhi@foxmail.com>
-" Last Change: 2017.04.19
+" Last Change: 2017.04.24
 " ==========================================================
 
 " make sure the module loaded once
