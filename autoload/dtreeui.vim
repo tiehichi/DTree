@@ -47,13 +47,13 @@ endfunction
 " refresh displayed file tree
 function! dtreeui#RefreshUI(ftlist)
     let l:saveview = winsaveview()
-    set modifiable
+    setlocal modifiable
     normal gg
     normal dG
     call append(0, a:ftlist)
     normal dd       
     normal gg
-    set nomodifiable
+    setlocal nomodifiable
     call winrestview(l:saveview)
 endfunction
 
