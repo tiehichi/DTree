@@ -7,6 +7,9 @@ use command 'DTreeToggle' to open or close dtree window
 ## Update
 
 ### 2017.04.24
+- fix bug that when open file in a new buffer, it will set nomodifiable flag
+
+### 2017.04.24
 - fix bug that when close the vertical window, dtree window will resize to half of screen
 
 ### 2017.04.19
