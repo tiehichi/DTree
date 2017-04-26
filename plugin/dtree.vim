@@ -46,7 +46,7 @@ endfunction
 " Function: IsDirClosed
 " if closed, return 1, else return 0
 function! s:IsDirClosed(index)
-    if match(s:filetree[a:index], "▷") != -1
+    if match(s:filetree[a:index], '\v^\s*\+') != -1
         return 1
     else
         return 0
@@ -56,7 +56,7 @@ endfunction
 " Function: IsDirOpened
 " if opened, return 1, else return 0
 function! s:IsDirOpened(index)
-    if match(s:filetree[a:index], "▽") != -1
+    if match(s:filetree[a:index], '\v^\s*\-') != -1
         return 1
     else
         return 0
@@ -127,6 +127,9 @@ function! s:OpenFile(index)
         call win_gotoid(bufwinid('__DTree__'))
         execute('vertical resize 30')
         call win_gotoid(l:newwinid)
+    elseif winnr() == winnr('#')
+        call win_gotoid(win_getid(winnr()+1))
+        execute('e ' . s:filetreeap[a:index])
     else
         call win_gotoid(win_getid(winnr('#')))
         execute('e ' . s:filetreeap[a:index])
