@@ -6,6 +6,10 @@ use command 'DTreeToggle' to open or close dtree window
 
 ## Update
 
+### 2017.04.26
+- update '+' and '-' to show the directory's status
+- fix bug that when use 'enter' to open file, may be open it in the '__DTree__' window
+
 ### 2017.04.24
 - fix bug that when open file in a new buffer, it will set nomodifiable flag
 
