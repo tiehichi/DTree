@@ -6,7 +6,7 @@
 
 " Function: DivideFileList
 " divide file list to normal file and directory
-" Directory: '▷' + dirname
+" Directory: '+' + dirname
 " Normal File: ' ' + filename
 function! dtreeui#DivideFileList(ftlist, abfilepath, depth)
     let l:ftlist = deepcopy(a:ftlist)
@@ -14,7 +14,7 @@ function! dtreeui#DivideFileList(ftlist, abfilepath, depth)
     let l:index = 0
     for l:file in a:abfilepath
         if isdirectory(l:file)
-            let l:ftlist[l:index] = '▷' . l:ftlist[l:index] . '/'
+            let l:ftlist[l:index] = '+' . l:ftlist[l:index] . '/'
         else
             let l:ftlist[l:index] = ' ' . l:ftlist[l:index]
         endif
@@ -32,15 +32,15 @@ function! dtreeui#DivideFileList(ftlist, abfilepath, depth)
 endfunction
 
 " Function: RefreshOpenedDir
-" change the displayed directory's state, from '▷' to '▽'
+" change the displayed directory's state, from '+' to '-'
 function! dtreeui#RefreshOpenedDir(dirpath)
-    return substitute(a:dirpath, "▷", "▽", "e")
+    return substitute(a:dirpath, "+", "-", "e")
 endfunction
 
 " Function: RefreshClosedDir
-" change the displayed directory's state, from '▽' to '▷'
+" change the displayed directory's state, from '-' to '+'
 function! dtreeui#RefreshClosedDir(dirpath)
-    return substitute(a:dirpath, "▽", "▷", "e")
+    return substitute(a:dirpath, "-", "+", "e")
 endfunction
 
 " Function: RefreshUI
