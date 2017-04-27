@@ -72,7 +72,6 @@ function! s:GetRootFileList()
         call add(s:filetreeap, l:cwd . "/" . l:file)
     endfor
     let s:filetree = dtreeui#DivideFileList(s:filetree, s:filetreeap, 0)
-    echo s:filetree
     call dtreeui#RefreshUI(s:filetree)
 endfunction
 
