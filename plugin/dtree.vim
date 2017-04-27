@@ -72,6 +72,7 @@ function! s:GetRootFileList()
         call add(s:filetreeap, l:cwd . "/" . l:file)
     endfor
     let s:filetree = dtreeui#DivideFileList(s:filetree, s:filetreeap, 0)
+    echo s:filetree
     call dtreeui#RefreshUI(s:filetree)
 endfunction
 
@@ -124,7 +125,7 @@ function! s:OpenFile(index)
     if winnr('$') == 1
         execute('vertical rightbelow sp ' . s:filetreeap[a:index])
         let l:newwinid = win_getid(winnr())
-        call win_gotoid(bufwinid('__DTree__'))
+        call win_gotoid(win_getid(bufwinnr('__DTree__')))
         execute('vertical resize 30')
         call win_gotoid(l:newwinid)
     elseif winnr() == winnr('#')
@@ -149,7 +150,7 @@ endfunction
 " close file tree window
 function! s:CloseFileTree()
     let l:lastwinid = win_getid(winnr())
-    call win_gotoid(bufwinid('__DTree__'))
+    call win_gotoid(win_getid(bufwinnr('__DTree__')))
     execute('q!')
     call win_gotoid(l:lastwinid)
 endfunction
@@ -173,7 +174,7 @@ endfunction
 function! s:ResetDTreeWinResize()
     if bufwinnr('__DTree__') != -1
         let lastwinnr = winnr()
-        call win_gotoid(bufwinid('__DTree__'))
+        call win_gotoid(win_getid(bufwinnr('__DTree__')))
         execute('vertical resize 30')
         call win_gotoid(win_getid(lastwinnr))
     endif
